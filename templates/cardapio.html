@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio - Tudo Mais Doce</title>
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="cardapio-index-container">
+        <!-- Container para o botão de voltar e o logo -->
+        <div class="cardapio-header">
+            <!-- Botão Voltar -->
+            <div class="cardapio-back-button">
+                <a href="index.html"><i class="fas fa-arrow-left"></i></a>
+            </div>
+
+            <!-- Logo -->
+            <img src="../public/img/logo.jpg" alt="Logo Tudo Mais Doce" class="cardapio-logo">
+        </div>
+
+        <h3>CARDÁPIO</h3>
+
+        <!-- Informações de Contato -->
+        <div class="cardapio-info-cardapio">
+            <div class="info-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>(69) 99XX-XXXX</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span>Entrega aproximada 40 min.</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-motorcycle"></i>
+                <span>R$ </span><span id="taxa-entrega">8,00</span>
+            </div>
+        </div>
+        
+        <!-- Seção do Produto -->
+        <div class="cardapio-produto-card">
+            <!-- Área da Imagem (Admin) -->
+            <img src="../public/img/salada.jpeg" alt="Salada de Frutas" class="cardapio-product-image">
+
+            <h4 class="cardapio-product-titulo">
+                <span class="cardapio-product-nome">Salada de Frutas</span> 
+                <span class="cardapio-product-ml">- 300ml</span>
+                <!-- Preço do produto -->
+                <span class="cardapio-product-valor">R$ <span class="cardapio-product-preco">15,00</span></span>
+
+            </h4>
+
+            <p class="cardapio-product-descricao">A salada de frutas é uma sobremesa fresca e saudável, composta por uma variedade de frutas picadas, geralmente misturadas com algum tipo de creme ou suco.</p>
+            
+            <!-- Seção de opções adicionais -->
+            <div class="cardapio-acrescimos-section">
+                <h4 class="cardapio-subtitulo-destaque">Acrescentar Porções <span class="cardapio-opcao">(opcional)</span></h4>
+                <ul class="cardapio-acrescimos-lista">
+                    <li>
+                        <label class="cardapio-checkbox-index-container">
+                            <input type="checkbox" class="cardapio-acrescimo-check" data-preco="3.00">
+                            <span class="cardapio-checkmark"></span>
+                            Morango R$ <span class="cardapio-preco-acrescimo">3,00</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cardapio-checkbox-index-container">
+                            <input type="checkbox" class="cardapio-acrescimo-check" data-preco="3.00">
+                            <span class="cardapio-checkmark"></span>
+                            Kiwi R$ <span class="cardapio-preco-acrescimo">3,00</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cardapio-checkbox-index-container">
+                            <input type="checkbox" class="cardapio-acrescimo-check" data-preco="3.00">
+                            <span class="cardapio-checkmark"></span>
+                            Leite Condensado R$ <span class="cardapio-preco-acrescimo">3,00</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="cardapio-checkbox-index-container">
+                            <input type="checkbox" class="cardapio-acrescimo-check" data-preco="3.00">
+                            <span class="cardapio-checkmark"></span>
+                            Leite em pó R$ <span class="cardapio-preco-acrescimo">3,00</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <!-- Escolha do Creme -->
+            <div class="cardapio-creme-section">
+                <h4 class="cardapio-subtitulo-destaque">Escolha o creme <span class="cardapio-obrigatorio">(obrigatório)</span></h4>
+                <select id="cardapio-creme" class="cardapio-creme-select" required>
+                    <option value="" disabled selected>Escolha</option>
+                    <option value="creme">Creme</option>
+                    <option value="maracuja">Maracujá</option>
+                    <option value="chocolate_belga">Chocolate Belga</option>
+                    <!-- Adicione mais opções seguindo o mesmo padrão -->
+                </select>
+            </div>
+
+            <!-- Observações -->
+            <div class="cardapio-observacoes-section">
+                <label for="cardapio-observacao" class="cardapio-observacoes-label">Alguma observação?</label>
+                <textarea id="cardapio-observacao" class="cardapio-observacoes-textarea" placeholder="Ex: Sem banana, mais morangos..."></textarea>
+            </div>
+        </div>
+
+        <!-- Controle de Quantidade e Preço Fixo -->
+        <div class="cardapio-pedido-footer">
+            <!-- Controle de quantidade -->
+            <div class="cardapio-quantity-control">
+                <button class="cardapio-qtd-btn" onclick="decreaseQuantity()">-</button>
+                <span id="cardapio-quantity" class="cardapio-qtd-number">1</span>
+                <button class="cardapio-qtd-btn" onclick="increaseQuantity()">+</button>
+            </div>
+
+            <!-- Botão Comprar -->
+            <button class="cardapio-add-btn" id="btn-comprar" type="submit">
+                Comprar R$ <span id="cardapio-total"></span>
+            </button>
+        </div>
+    </div>
+
+    <script src="../public/js/script.js"></script>
+</body>
+</html>

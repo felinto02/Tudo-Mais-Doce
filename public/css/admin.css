@@ -1,0 +1,289 @@
+        /* Estilos gerais */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .password-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .password-input-wrapper {
+            position: relative;
+        }
+        
+        .password-input-wrapper input {
+            width: 100%;
+            padding: 10px;
+            padding-right: 35px; /* Espaço para o ícone */
+            box-sizing: border-box;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 36%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .password-toggle:hover {
+            color: #333;
+        }
+
+        
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .admin-modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-modal h4 {
+            margin-top: 0;
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .admin-modal label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .admin-modal input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .admin-button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        
+        .admin-button-group button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .admin-button-group button:first-child {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .admin-button-group button:last-child {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .admin-error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        /* Estilos do conteúdo admin */
+        .admin-index-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .admin-index-container h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .admin-section h4 {
+            margin-top: 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-section h4 i {
+            color: #3498db;
+        }
+        
+        .admin-form-group {
+            margin-bottom: 15px;
+        }
+        
+        .admin-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .admin-form-group input,
+        .admin-form-group select,
+        .admin-form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .admin-form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .admin-form-group .time-inputs {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .admin-form-group .time-inputs input {
+            flex: 1;
+        }
+        
+        button[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        
+        .admin-alterar-senha-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .admin-alterar-senha-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Estilos para listas editáveis */
+        .editable-list {
+            margin-top: 15px;
+        }
+        
+        .editable-list-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .editable-list-item input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .editable-list-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .editable-list-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+        
+        .editable-list-actions button:hover {
+            color: #3498db;
+        }
+        
+        .editable-list-actions button.delete:hover {
+            color: #e74c3c;
+        }
+        
+        .add-item-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .add-item-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .admin-section {
+                padding: 15px;
+            }
+            
+            .admin-form-group .time-inputs {
+                flex-direction: column;
+            }
+        }

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Admin</title>
+    <link rel="stylesheet" href="../public/css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="admin-loginModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <h4>Login do Administrador</h4>
+            <form id="admin-loginForm">
+                <label for="admin-login">Usuário:</label>
+                <input type="text" id="admin-login" name="admin-login" >
+
+                <label for="admin-senha">Senha:</label>
+                <div class="password-input-wrapper">
+                    <input type="password" id="admin-senha" name="admin-senha" required>
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                </div>
+
+                <div class="admin-button-group">
+                    <button type="submit">Entrar</button>
+                    <button type="button" onclick="fecharLoginModal()">Cancelar</button>
+                </div>
+            </form>
+            <p id="admin-loginError" class="admin-error-message"></p>
+        </div>
+    </div>
+
+    <!-- Conteúdo da Página de Admin (inicialmente oculto) -->
+    <div id="admin-content" class="admin-index-container" style="display: none;">
+        <h3>Painel de Administração</h3>
+
+        <!-- Botão para alterar usuário e senha -->
+        <button class="admin-alterar-senha-btn" onclick="abrirModalAlterarSenha()">
+            <i class="fas fa-user-cog"></i> Alterar Usuário e Senha
+        </button>
+
+        <!-- Seção de Configurações da Loja -->
+        <section class="admin-section">
+            <h4><i class="fas fa-store"></i> Configurações da Loja</h4>
+            <form id="admin-form-loja">
+                <div class="admin-form-group">
+                    <label for="admin-horario-abertura">Horário de Funcionamento:</label>
+                    <div class="time-inputs">
+                        <input type="time" id="admin-horario-abertura" name="admin-horario-abertura" >
+                        <input type="time" id="admin-horario-fechamento" name="admin-horario-fechamento" >
+                    </div>
+                </div>
+                
+                <div class="admin-form-group">
+                    <label for="admin-logo-loja">Logo da Loja:</label>
+                    <input type="file" id="admin-logo-loja" name="admin-logo-loja" accept="image/*">
+                </div>
+                
+                <button type="submit">Salvar Configurações</button>
+            </form>
+        </section>
+
+        <!-- Seção de Informações de Contato -->
+        <section class="admin-section">
+            <h4><i class="fas fa-phone-alt"></i> Informações de Contato</h4>
+            <form id="admin-form-contato">
+                <div class="admin-form-group">
+                    <label for="admin-telefone">Número de Telefone:</label>
+                    <input type="text" id="admin-telefone" name="admin-telefone" maxlength="15" placeholder=" " oninput="mascaraTelefone(this)">
+                </div>
+                
+                <div class="admin-form-group">
+                    <label for="admin-tempo-entrega">Tempo Médio de Entrega (minutos):</label>
+                    <input type="number" id="admin-tempo-entrega" name="admin-tempo-entrega" >
+                </div>
+                
+                <div class="admin-form-group">
+                    <label for="admin-taxa-entrega">Taxa de Entrega (R$):</label>
+                    <input type="number" id="admin-taxa-entrega" name="admin-taxa-entrega" step="0.01" >
+                </div>
+                
+                <button type="submit">Salvar Configurações</button>
+            </form>
+        </section>
+
+        <!-- Seção de Gerenciamento de Produtos -->
+        <section class="admin-section">
+            <h4><i class="fas fa-utensils"></i> Gerenciamento de Produtos</h4>
+            <form id="admin-form-produto">
+                <div class="admin-form-group">
+                    <label for="admin-nome-produto">Nome do Produto:</label>
+                    <input type="text" id="admin-nome-produto" name="admin-nome-produto" >
+                </div>
+                
+                <div class="admin-form-group">
+                    <label for="admin-tamanho-produto">Tamanho (ml/g):</label>
+                    <input type="text" id="admin-tamanho-produto" name="admin-tamanho-produto" >
+                </div>
+                
+                <div class="admin-form-group">
+                    <label for="admin-preco-produto">Preço (R$):</label>
+                    <input type="number" id="admin-preco-produto" name="admin-preco-produto" step="0.01" >
+                </div>
+                
+                <div class="admin-form-group">
+                    <label for="admin-imagem-produto">URL da Imagem:</label>
+                    <input type="url" id="admin-imagem-produto" name="admin-imagem-produto" >
+                </div>
+                
+                <button type="submit">Salvar Produto</button>
+            </form>
+        </section>
+
+        <!-- Seção de Gerenciamento de Porções -->
+        <section class="admin-section">
+            <h4><i class="fas fa-list"></i> Gerenciamento de Porções</h4>
+            <div class="editable-list" id="porcoes-list">
+                <!-- Itens serão adicionados dinamicamente aqui -->
+            </div>
+            
+            <div class="admin-form-group">
+                <label>Adicionar Nova Porção:</label>
+                <div class="editable-list-item">
+                    <input type="text" id="nova-porcao-nome" placeholder="Nome da Porção">
+                    <input type="number" id="nova-porcao-preco" placeholder="Preço (R$)" step="0.01">
+                    <div class="editable-list-actions">
+                        <button class="add-item-btn" onclick="adicionarPorcao()">
+                            <i class="fas fa-plus"></i> Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Gerenciamento de Cremes -->
+        <section class="admin-section">
+            <h4><i class="fas fa-ice-cream"></i> Gerenciamento de Cremes</h4>
+            <div class="editable-list" id="cremes-list">
+                <!-- Itens serão adicionados dinamicamente aqui -->
+            </div>
+            
+            <div class="admin-form-group">
+                <label>Adicionar Novo Creme:</label>
+                <div class="editable-list-item">
+                    <input type="text" id="novo-creme-nome" placeholder="Nome do Creme">
+                    <div class="editable-list-actions">
+                        <button class="add-item-btn" onclick="adicionarCreme()">
+                            <i class="fas fa-plus"></i> Adicionar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal para Alterar Usuário e Senha -->
+    <div id="admin-alterarSenhaModal" class="admin-modal" style="display: none;">
+        <div class="admin-modal-content">
+            <h4>Alterar Usuário e Senha</h4>
+            <form id="admin-alterarSenhaForm">
+                <label for="admin-usuarioAtual">Usuário Atual:</label>
+                <input type="text" id="admin-usuarioAtual" name="admin-usuarioAtual" readonly>
+
+                <label for="admin-novoUsuario">Novo Usuário (opcional):</label>
+                <input type="text" id="admin-novoUsuario" name="admin-novoUsuario">
+
+                <label for="admin-senhaAtual">Senha Atual:</label>
+                <input type="password" id="admin-senhaAtual" name="admin-senhaAtual" required>
+
+                <label for="admin-novaSenha">Nova Senha:</label>
+                <input type="password" id="admin-novaSenha" name="admin-novaSenha" required>
+
+                <label for="admin-confirmarSenha">Confirmar Nova Senha:</label>
+                <input type="password" id="admin-confirmarSenha" name="admin-confirmarSenha" required>
+
+                <div class="admin-button-group">
+                    <button type="submit">Salvar</button>
+                    <button type="button" onclick="fecharModalAlterarSenha()">Cancelar</button>
+                </div>
+            </form>
+            <p id="admin-senhaError" class="admin-error-message"></p>
+        </div>
+    </div>
+
+    <script src="../public/js/admin.js"></script>
+</body>
+</html>
